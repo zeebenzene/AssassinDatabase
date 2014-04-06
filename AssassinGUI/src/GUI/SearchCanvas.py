@@ -23,8 +23,10 @@ class searchCanvas(tk.Canvas):
         self.createEmployerSearch()
         self.createSuccessSearch()
         self.createMissionSearch()
+        self.createSuccessMissions()
+        self.createFailedMissions()
         self.createRatingSearch()
-        b1 = button(self, 10, 0, "SEARCH")
+        b1 = button(self, 12, 0, "SEARCH")
     
     def createHeader(self):
         header = tk.Label(self)
@@ -89,21 +91,41 @@ class searchCanvas(tk.Canvas):
         self.successText.setText("min(%)")
 
     def createMissionSearch(self):
-        missionLabel = label(self, 8, 0, "Total Missions:")
-        self.missionMin = text(self, 4, 1, "w")
+        missionLabel = label(self, 8, 0, "# Of Missions:")
+        self.missionMin = text(self, 8, 1, "w")
         self.missionMin.setText("min")
         self.missionMin.setWidth(9)
         
-        self.missionMax = text(self, 4, 1, "e")
+        self.missionMax = text(self, 8, 1, "e")
         self.missionMax.setText("max")
-        self.missionMax.setWidth(9)        
+        self.missionMax.setWidth(9)    
+    
+    def createSuccessMissions(self):
+        SMissionLabel = label(self, 9, 0, "# Of Successful Missions")
+        self.SmissionMin = text(self, 9, 1, "w")
+        self.SmissionMin.setText("min")
+        self.SmissionMin.setWidth(9)
+        
+        self.SmissionMax = text(self, 9, 1, "e")
+        self.SmissionMax.setText("max")
+        self.SmissionMax.setWidth(9)       
+    
+    def createFailedMissions(self):
+        FMissionLabel = label(self, 10, 0, "# of Failed Missions")
+        self.FmissionMin = text(self, 10, 1, "w")
+        self.FmissionMin.setText("min")
+        self.FmissionMin.setWidth(9)
+    
+        self.FmissionMax = text(self, 10, 1, "e")
+        self.FmissionMax.setText("max")
+        self.FmissionMax.setWidth(9)
     
     def createRatingSearch(self):
         options = []
         for i in range(0, 6):
             options.append(i)
-        self.ratingMenu = dropMenu(self, 9, 1, options)
-        employerLabel = label(self, 9, 0, "Avg. Rating:")        
+        self.ratingMenu = dropMenu(self, 11, 1, options)
+        employerLabel = label(self, 11, 0, "Avg. Rating:")        
     
     def getFields(self):
         return [self.nameText, self.ageMenu, self.heightCent, self.weightText, self.nationalityMenu, 
