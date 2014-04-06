@@ -3,6 +3,7 @@ import tkinter as tk
 class button(tk.Button):
     def __init__(self, master,xPos, yPos, title):
         tk.Button.__init__(self, master)
+        self.master = master
         self.conf(xPos, yPos, title)
 #         self.place(x = xPos, y = yPos)
         
@@ -18,7 +19,12 @@ class button(tk.Button):
                     activebackground="black",
                     activeforeground="green",  
                     text=title, 
+                    command=self.getName,
                     font = ("Monospace", 16, "bold", "underline"))
+    
+    def getName(self):
+        for l in self.master.getFields():
+            print(l.getText())
     
     def changeColour(self):
         if(self["bg"] == "black"):

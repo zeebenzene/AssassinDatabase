@@ -3,9 +3,9 @@ from tkinter import *
 
 class dropMenu(tk.OptionMenu):
     def __init__(self, master, xPos, yPos, choices):
-        var = StringVar(master)
-        var.set("select one") # initial value
-        tk.OptionMenu.__init__(self, master, var, *choices)
+        self.var = StringVar(master)
+        self.var.set("select one") # initial value
+        tk.OptionMenu.__init__(self, master, self.var, *choices)
         
         self["menu"].config(bg="black",
                             fg="green")
@@ -24,3 +24,5 @@ class dropMenu(tk.OptionMenu):
                   sticky="w",
                   padx=5,
                   pady=5)
+    def getText(self):
+        return self.var.get()
