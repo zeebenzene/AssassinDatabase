@@ -32,7 +32,7 @@ class searchCanvas(tk.Canvas):
     
     def createHeader(self):
         header = tk.Label(self)
-        header.config(text="Basic Info",
+        header.config(text="Search Assassins",
                       font=("Helvetica",20,"bold"),
                       bg="black",
                       fg="green")
