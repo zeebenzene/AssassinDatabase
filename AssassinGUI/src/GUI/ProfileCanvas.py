@@ -15,3 +15,5 @@ class profileCanvas(tk.Canvas):
         label = tk.Label(self,image=photo)
         label.image = photo
         label.pack()
+        
+    

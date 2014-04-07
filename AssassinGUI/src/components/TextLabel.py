@@ -3,6 +3,8 @@ import tkinter as tk
 class label(tk.Label):
     def __init__(self, master, xPos, yPos, text): 
         tk.Label.__init__(self, master)
+        self.xPos = xPos
+        self.yPos = yPos
         
         self.config(text = text, 
                     fg = "green",
@@ -15,3 +17,9 @@ class label(tk.Label):
                   pady=5)
     def setSize(self, int):
         self.config(font=("Monospace",int))
+    
+    def setSpan(self, direction, size):
+        if direction == "rows":
+            self.grid(row=self.xPos, column=self.yPos, rowspan=size, sticky="nsew")
+        else:
+            self.grid(row=self.xPos, column=self.yPos, columnspan=size, sticky="ew")

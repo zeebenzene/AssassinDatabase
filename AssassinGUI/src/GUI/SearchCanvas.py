@@ -29,15 +29,9 @@ class searchCanvas(tk.Canvas):
         b1 = button(self, 12, 0, "SEARCH")
     
     def createHeader(self):
-        header = tk.Label(self)
-        header.config(text="Search Assassins",
-                      font=("Helvetica",20,"bold"),
-                      bg="black",
-                      fg="green")
-        header.grid(row=0, 
-                    column=0, 
-                    columnspan=2,
-                    pady=10)
+        header = label(self, 0, 0, "Search Assassins")
+        header.setSize(20)
+        header.setSpan("column", 2)
         
     def createNameSearch(self):
         nameLabel = label(self, 1, 0, "Name:")
@@ -146,4 +140,3 @@ class searchCanvas(tk.Canvas):
                "FmissionMin" : int(self.FmissionMin.getText()),
                "FmissionMax" : int(self.FmissionMax.getText())
                }
-        
