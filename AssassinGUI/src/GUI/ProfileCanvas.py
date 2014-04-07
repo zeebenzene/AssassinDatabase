@@ -11,7 +11,7 @@ class profileCanvas(tk.Canvas):
 #         self.createWidgets()
         
     def createWidgets(self):
-        photo = PhotoImage(file = '//1CLfizu.gif')
+        photo = PhotoImage(file = '\\src\\1CLfizu.gif')
         label = tk.Label(self,image=photo)
         label.image = photo
         label.pack()

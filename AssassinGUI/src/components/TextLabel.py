@@ -10,6 +10,8 @@ class label(tk.Label):
                     font = ("Monospace",16))
         self.grid(row=xPos, 
                   column=yPos,
-                  sticky="w",
+                  sticky="e",
                   padx=5,
                   pady=5)
+    def setSize(self, int):
+        self.config(font=("Monospace",int))

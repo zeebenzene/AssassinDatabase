@@ -85,48 +85,65 @@ class searchCanvas(tk.Canvas):
         self.employerMenu= dropMenu(self, 6, 1, options)
         employerLabel = label(self, 6, 0, "Employer:")
     
-    def createSuccessSearch(self):
-        successLabel = label(self, 7, 0, "Successes(%):")
-        self.successText = text(self, 7, 1, "w")
-        self.successText.setText("min(%)")
-
-    def createMissionSearch(self):
-        missionLabel = label(self, 8, 0, "# Of Missions:")
-        self.missionMin = text(self, 8, 1, "w")
-        self.missionMin.setText("min")
-        self.missionMin.setWidth(9)
-        
-        self.missionMax = text(self, 8, 1, "e")
-        self.missionMax.setText("max")
-        self.missionMax.setWidth(9)    
-    
-    def createSuccessMissions(self):
-        SMissionLabel = label(self, 9, 0, "# Of Successful Missions")
-        self.SmissionMin = text(self, 9, 1, "w")
-        self.SmissionMin.setText("min")
-        self.SmissionMin.setWidth(9)
-        
-        self.SmissionMax = text(self, 9, 1, "e")
-        self.SmissionMax.setText("max")
-        self.SmissionMax.setWidth(9)       
-    
-    def createFailedMissions(self):
-        FMissionLabel = label(self, 10, 0, "# of Failed Missions")
-        self.FmissionMin = text(self, 10, 1, "w")
-        self.FmissionMin.setText("min")
-        self.FmissionMin.setWidth(9)
-    
-        self.FmissionMax = text(self, 10, 1, "e")
-        self.FmissionMax.setText("max")
-        self.FmissionMax.setWidth(9)
-    
     def createRatingSearch(self):
         options = []
         for i in range(0, 6):
             options.append(i)
-        self.ratingMenu = dropMenu(self, 11, 1, options)
-        employerLabel = label(self, 11, 0, "Avg. Rating:")        
+        self.ratingMenu = dropMenu(self, 7, 1, options)
+        employerLabel = label(self, 7, 0, "Avg. Rating:")  
+    
+    def createSuccessSearch(self):
+        successLabel = label(self, 8, 0, "Successes:")
+        self.successText = text(self, 8, 1, "w")
+        self.successText.setText("min(%)")
+
+    def createMissionSearch(self):
+        missionLabel = label(self, 9, 0, "# of Missions:")
+        self.missionMin = text(self, 9, 1, "w")
+        self.missionMin.setText("min")
+        self.missionMin.setWidth(9)
+        
+        self.missionMax = text(self, 9, 1, "e")
+        self.missionMax.setText("max")
+        self.missionMax.setWidth(9)    
+    
+    def createSuccessMissions(self):
+        SMissionLabel = label(self, 10, 0, "# of Successful Missions:")
+        self.SmissionMin = text(self, 10, 1, "w")
+        self.SmissionMin.setText("min")
+        self.SmissionMin.setWidth(9)
+        
+        self.SmissionMax = text(self, 10, 1, "e")
+        self.SmissionMax.setText("max")
+        self.SmissionMax.setWidth(9)
+    
+    def createFailedMissions(self):
+        FMissionLabel = label(self, 11, 0, "# of Failed Missions:")
+        self.FmissionMin = text(self, 11, 1, "w")
+        self.FmissionMin.setText("min")
+        self.FmissionMin.setWidth(9)
+    
+        self.FmissionMax = text(self, 11, 1, "e")
+        self.FmissionMax.setText("max")
+        self.FmissionMax.setWidth(9)      
     
     def getFields(self):
-        return [self.nameText, self.ageMenu, self.heightCent, self.weightText, self.nationalityMenu, 
-                self.employerMenu, self.successMenu, self.flawMenu, self.ratingMenu]
+        return{"name" : self.nameText.getText(), 
+               "minAge" : int(self.ageMin.getText()),
+               "maxAge" : int(self.ageMax.getText()),
+               "minHeight" : int(self.heightMin.getText()),
+               "maxHeight" : int(self.heightMax.getText()),
+               "minWeight" : int(self.weightMin.getText()),
+               "maxWeight" : int(self.weightMax.getText()),
+               "nationality" : self.nationalityMenu.getText(),
+               "employer" : self.employerMenu.getText(),
+               "avgRating" : int(self.ratingMenu.getText()),
+               "successes" : float(self.successText.getText()),
+               "minMissions" : int(self.missionMin.getText()),
+               "maxMissions" : int(self.missionMax.getText()),
+               "SmissionMin" : int(self.SmissionMin.getText()),
+               "SmissionMax" : int(self.SmissionMax.getText()),
+               "FmissionMin" : int(self.FmissionMin.getText()),
+               "FmissionMax" : int(self.FmissionMax.getText())
+               }
+        

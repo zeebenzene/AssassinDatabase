@@ -2,8 +2,7 @@ from SearchCanvas import searchCanvas as search
 from ProfileCanvas import profileCanvas as profile
 from tkinter import *
 import tkinter as tk
-
-
+import os
         
 class Application(tk.Frame):
     def __init__(self, master=None):
@@ -18,3 +17,5 @@ class Application(tk.Frame):
 
 app = Application()
 app.mainloop()
+
+print(os.listdir(os.path.dirname(__file__)))
