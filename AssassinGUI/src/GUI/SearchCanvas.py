@@ -1,18 +1,24 @@
 import tkinter as tk
+import sqlite3
 from tkinter import *
-from components.Button import button
+from components.SearchButton import button
 from components.TextLabel import label
 from components.TextBox import text 
 from components.DropDownMenu import dropMenu
 
+
+
 class searchCanvas(tk.Canvas):    
-    def __init__(self, master):
+    conn = sqlite3.connect("C:\\Users\\Kit\\workspace\\NewAssassinProject\\src\\startup\\AssassinMingle") #DATA BASE FILE GOES HERE
+    cur = conn.cursor()
+
+    def __init__(self, master, profileCanvas):
         tk.Canvas.__init__(self, master, bg="black")
         Grid.rowconfigure(master,0,weight=1)
         self.grid(row=0, column=0, sticky=("n","s","w"))
-        self.createWidgets()        
+        self.createWidgets(profileCanvas)    
     
-    def createWidgets(self):
+    def createWidgets(self, profileCanvas):
         self.createHeader()
         self.createNameSearch()
         self.createAgeSearch()
@@ -24,9 +30,9 @@ class searchCanvas(tk.Canvas):
         self.createSuccessSearch()
         self.createMissionSearch()
         self.createSuccessMissions()
-        self.createFailedMissions()
+#         self.createFailedMissions()
         self.createRatingSearch()
-        b1 = button(self, 12, 0, "SEARCH")
+        b1 = button(self, 12, 0, "SEARCH", profileCanvas)
     
     def createHeader(self):
         header = label(self, 0, 0, "Search Assassins")
@@ -70,12 +76,18 @@ class searchCanvas(tk.Canvas):
         self.weightMax.setWidth(9)
         
     def createNationalitySearch(self):
-        options = ["American", "Russia", "Slovakia", "Bulgaria", "Lithuania", "Argentina", "Brazil", "Chile", "Columbia", "Djibouti", "Liberia", "South Africa"]
+        rawResult = self.cur.execute("SELECT nationality FROM AMBasicInfo GROUP BY nationality").fetchall()
+        options = []
+        for r in rawResult:
+            options.append(r[0])
         self.nationalityMenu = dropMenu(self, 5, 1, options)
         nationalityLabel = label(self, 5, 0, "Nationality:")
     
     def createEmployerSearch(self):
-        options = ["Independent", "Italian Mafia", "Russian Mafia", "Anonymous", "lulzsec", "Yakuza", "Triads", "CIA", "MI6"]
+        rawResult = self.cur.execute("SELECT past_employers FROM AMEmployment GROUP BY past_employers").fetchall()
+        options = []
+        for r in rawResult:
+            options.append(r[0])
         self.employerMenu= dropMenu(self, 6, 1, options)
         employerLabel = label(self, 6, 0, "Employer:")
     
@@ -102,7 +114,7 @@ class searchCanvas(tk.Canvas):
         self.missionMax.setWidth(9)    
     
     def createSuccessMissions(self):
-        SMissionLabel = label(self, 10, 0, "# of Successful Missions:")
+        SMissionLabel = label(self, 10, 0, "# of Successes:")
         self.SmissionMin = text(self, 10, 1, "w")
         self.SmissionMin.setText("min")
         self.SmissionMin.setWidth(9)
@@ -111,32 +123,32 @@ class searchCanvas(tk.Canvas):
         self.SmissionMax.setText("max")
         self.SmissionMax.setWidth(9)
     
-    def createFailedMissions(self):
-        FMissionLabel = label(self, 11, 0, "# of Failed Missions:")
-        self.FmissionMin = text(self, 11, 1, "w")
-        self.FmissionMin.setText("min")
-        self.FmissionMin.setWidth(9)
-    
-        self.FmissionMax = text(self, 11, 1, "e")
-        self.FmissionMax.setText("max")
-        self.FmissionMax.setWidth(9)      
+#     def createFailedMissions(self):
+#         FMissionLabel = label(self, 11, 0, "# of Failed Missions:")
+#         self.FmissionMin = text(self, 11, 1, "w")
+#         self.FmissionMin.setText("min")
+#         self.FmissionMin.setWidth(9)
+#     
+#         self.FmissionMax = text(self, 11, 1, "e")
+#         self.FmissionMax.setText("max")
+#         self.FmissionMax.setWidth(9)      
     
     def getFields(self):
         return{"name" : self.nameText.getText(), 
-               "minAge" : int(self.ageMin.getText()),
-               "maxAge" : int(self.ageMax.getText()),
-               "minHeight" : int(self.heightMin.getText()),
-               "maxHeight" : int(self.heightMax.getText()),
-               "minWeight" : int(self.weightMin.getText()),
-               "maxWeight" : int(self.weightMax.getText()),
+               "minAge" : self.ageMin.getText(),
+               "maxAge" : self.ageMax.getText(),
+               "minHeight" : self.heightMin.getText(),
+               "maxHeight" : self.heightMax.getText(),
+               "minWeight" : self.weightMin.getText(),
+               "maxWeight" : self.weightMax.getText(),
                "nationality" : self.nationalityMenu.getText(),
                "employer" : self.employerMenu.getText(),
-               "avgRating" : int(self.ratingMenu.getText()),
-               "successes" : float(self.successText.getText()),
-               "minMissions" : int(self.missionMin.getText()),
-               "maxMissions" : int(self.missionMax.getText()),
-               "SmissionMin" : int(self.SmissionMin.getText()),
-               "SmissionMax" : int(self.SmissionMax.getText()),
-               "FmissionMin" : int(self.FmissionMin.getText()),
-               "FmissionMax" : int(self.FmissionMax.getText())
+               "avgRating" : self.ratingMenu.getText(),
+               "successes" : self.successText.getText(),
+               "minMission" : self.missionMin.getText(),
+               "maxMission" : self.missionMax.getText(),
+               "SmissionMin" : self.SmissionMin.getText(),
+               "SmissionMax" : self.SmissionMax.getText(),
+#                "FmissionMin" : self.FmissionMin.getText(),
+#                "FmissionMax" : self.FmissionMax.getText()
                }

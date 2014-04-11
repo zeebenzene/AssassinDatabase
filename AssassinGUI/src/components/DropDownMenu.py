@@ -3,6 +3,8 @@ from tkinter import *
 
 class dropMenu(tk.OptionMenu):
     def __init__(self, master, xPos, yPos, choices):
+        self.xPos = xPos
+        self.yPos = yPos
         self.var = StringVar(master)
         self.var.set("select one") # initial value
         tk.OptionMenu.__init__(self, master, self.var, *choices)
@@ -26,3 +28,15 @@ class dropMenu(tk.OptionMenu):
                   pady=5)
     def getText(self):
         return self.var.get()
+    
+    def setChoices(self, choices):
+        self.var.set("Results")
+        self["menu"].delete(0, "end")
+        for c in choices:
+            self["menu"].add_command(label=c, command=tk._setit(self.var, c))
+            
+    def setSpan(self, direction, size):
+        if direction == "rows":
+            self.grid(row=self.xPos, column=self.yPos, rowspan=size, sticky="nsew")
+        else:
+            self.grid(row=self.xPos, column=self.yPos, columnspan=size, sticky="new")

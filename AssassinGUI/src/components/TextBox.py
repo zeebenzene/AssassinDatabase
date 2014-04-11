@@ -11,6 +11,7 @@ class text(tk.Text):
                   sticky=side,
                   padx=5,
                   pady=5)
+        
     def setWidth(self, int):
         self.config(width = int)
     def setText(self, text):
@@ -18,4 +19,4 @@ class text(tk.Text):
     def setSticky(self, side):
         self.config(sticky = text)
     def getText(self):
-        return self.get(1.0, "end")
+        return self.get(1.0, "end").rstrip("\n")

@@ -18,6 +18,9 @@ class label(tk.Label):
     def setSize(self, int):
         self.config(font=("Monospace",int))
     
+    def setText(self, txt):
+        self.config(text=txt)
+    
     def setSpan(self, direction, size):
         if direction == "rows":
             self.grid(row=self.xPos, column=self.yPos, rowspan=size, sticky="nsew")
